@@ -1,3 +1,14 @@
+type FeaturedProject = {
+  title: string;
+  category: string;
+  description: string;
+  stack: string[];
+  highlights: string[];
+  visual: "clientops" | "rag" | "autoflow" | "skin";
+  projectUrl?: string;
+  githubUrl?: string;
+};
+
 const navItems = [
   { label: "About", href: "#about" },
   { label: "Projects", href: "#projects" },
@@ -6,15 +17,29 @@ const navItems = [
   { label: "Contact", href: "#contact" },
 ];
 
-const featuredProjects = [
+const featuredProjects: FeaturedProject[] = [
   {
     title: "ClientOps AI Dashboard",
     category: "SaaS admin dashboard",
     description:
-      "A client operations workspace for managing clients, projects, tasks, notes, statuses, and AI-generated project summaries.",
-    stack: ["Next.js", "TypeScript", "AI summaries", "Admin UX"],
+      "A full-stack SaaS-style admin dashboard with Supabase Auth, protected user workspaces, client/project/task CRUD, project notes, activity logs, demo workspace seeding, task-derived progress metrics, and AI-style summary previews.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase Auth",
+      "PostgreSQL",
+      "Row Level Security",
+      "Server Actions",
+      "Zod validation",
+      "CRUD",
+      "AI automation",
+      "SaaS dashboard UI",
+    ],
     highlights: ["Client/project tracking", "Task and status workflows", "AI project recap cards"],
     visual: "clientops",
+    projectUrl: "https://clientops-ai-dashboard.vercel.app/login",
+    githubUrl: "https://github.com/JzHamid/clientops-ai-dashboard",
   },
   {
     title: "KnowledgeBase RAG Assistant",
@@ -196,10 +221,22 @@ export default function Home() {
                 </div>
 
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <a className="project-button" href="#" aria-label={`View ${project.title}`}>
+                  <a
+                    className="project-button"
+                    href={project.projectUrl ?? "#"}
+                    target={project.projectUrl ? "_blank" : undefined}
+                    rel={project.projectUrl ? "noopener noreferrer" : undefined}
+                    aria-label={`View ${project.title}`}
+                  >
                     View Project
                   </a>
-                  <a className="project-button project-button-muted" href="#" aria-label={`${project.title} GitHub`}>
+                  <a
+                    className="project-button project-button-muted"
+                    href={project.githubUrl ?? "#"}
+                    target={project.githubUrl ? "_blank" : undefined}
+                    rel={project.githubUrl ? "noopener noreferrer" : undefined}
+                    aria-label={`${project.title} GitHub`}
+                  >
                     GitHub
                   </a>
                 </div>
