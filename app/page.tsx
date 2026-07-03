@@ -1,12 +1,15 @@
+import Image from "next/image";
+
 type FeaturedProject = {
   title: string;
   category: string;
   description: string;
   stack: string[];
   highlights: string[];
-  visual: "clientops" | "rag" | "autoflow" | "skin" | "api";
+  visual: "clientops" | "skin" | "api" | "migration";
   projectUrl?: string;
   githubUrl?: string;
+  status?: "In Production";
 };
 
 const navItems = [
@@ -19,10 +22,32 @@ const navItems = [
 
 const featuredProjects: FeaturedProject[] = [
   {
-    title: "ClientOps AI Dashboard",
-    category: "SaaS admin dashboard",
+    title: "Lovable Cloud to Supabase Migration CLI",
+    category: "Local migration CLI",
     description:
-      "A full-stack SaaS-style admin dashboard with Supabase Auth, protected user workspaces, client/project/task CRUD, project notes, activity logs, demo workspace seeding, task-derived progress metrics, and AI-style summary previews.",
+      "A local CLI tool for migrating Lovable Cloud-hosted apps into standalone Supabase projects. It processes SQL migrations, table CSVs, auth user exports, and storage files, then runs phased commands for validation, schema migration, data import, auth migration, ID remapping, storage upload, checklist generation, and verification. Built with Claude Code and designed with a security-first local workflow so users do not need to upload sensitive Supabase service role keys to a hosted service.",
+    stack: [
+      "Node.js",
+      "CLI tooling",
+      "Supabase",
+      "PostgreSQL",
+      "data migration",
+      "auth migration",
+      "storage migration",
+      "CSV import",
+      "developer automation",
+      "Claude Code",
+      "testing",
+    ],
+    highlights: ["Local-first migration", "Phased validation flow", "Security-first key handling"],
+    visual: "migration",
+    githubUrl: "https://github.com/Abeagle25/lovable-supabase-migration-cli",
+  },
+  {
+    title: "ClientOps AI Dashboard",
+    category: "Full-stack SaaS/admin dashboard",
+    description:
+      "A full-stack SaaS/admin dashboard with Supabase Auth, protected user workspaces, client/project/task CRUD, project notes, activity logs, demo workspace seeding, task-derived metrics, Automations, and AI-style summary previews.",
     stack: [
       "Next.js",
       "TypeScript",
@@ -33,6 +58,7 @@ const featuredProjects: FeaturedProject[] = [
       "Server Actions",
       "Zod validation",
       "CRUD",
+      "Automations",
       "AI automation",
       "SaaS dashboard UI",
     ],
@@ -40,33 +66,6 @@ const featuredProjects: FeaturedProject[] = [
     visual: "clientops",
     projectUrl: "https://clientops-ai-dashboard.vercel.app/login",
     githubUrl: "https://github.com/JzHamid/clientops-ai-dashboard",
-  },
-  {
-    title: "KnowledgeBase RAG Assistant",
-    category: "Document AI assistant",
-    description:
-      "A retrieval-augmented assistant that answers questions from company documents and displays source references for trust and review.",
-    stack: ["RAG", "Embeddings", "Vector search", "LLM apps"],
-    highlights: ["Document Q&A", "Source citations", "Grounded responses"],
-    visual: "rag",
-  },
-  {
-    title: "AutoFlow Agent",
-    category: "AI automation tracker",
-    description:
-      "An agentic workflow tracker that qualifies leads, creates task logs, drafts follow-up messages, and summarizes daily activity.",
-    stack: ["Agents", "Automation", "Workflow design", "CRM logic"],
-    highlights: ["Lead qualification", "Follow-up drafting", "Daily summaries"],
-    visual: "autoflow",
-  },
-  {
-    title: "Skin Disease Cam",
-    category: "CNN classification project",
-    description:
-      "A computer vision project comparing MobileNetV2, EfficientNetB0, ResNet50, InceptionV3, and DenseNet121 for skin lesion classification.",
-    stack: ["Python", "CNNs", "TensorFlow", "Model comparison"],
-    highlights: ["Transfer learning", "Model benchmarking", "Medical image workflow"],
-    visual: "skin",
   },
   {
     title: "API Integration Hub",
@@ -89,6 +88,16 @@ const featuredProjects: FeaturedProject[] = [
     visual: "api",
     projectUrl: "https://api-integration-hub-gilt.vercel.app/",
     githubUrl: "https://github.com/JzHamid/api-integration-hub",
+  },
+  {
+    title: "Skin Disease Cam",
+    category: "CNN classification project",
+    description:
+      "A computer vision project comparing MobileNetV2, EfficientNetB0, ResNet50, InceptionV3, and DenseNet121 for skin lesion classification.",
+    stack: ["Python", "CNNs", "TensorFlow", "Model comparison"],
+    highlights: ["Transfer learning", "Model benchmarking", "Medical image workflow"],
+    visual: "skin",
+    status: "In Production",
   },
 ];
 
@@ -139,9 +148,9 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "5", label: "Featured AI and SaaS projects" },
-  { value: "RAG", label: "Document Q&A and source-backed answers" },
-  { value: "AI", label: "Workflow automation and agentic tooling" },
+  { value: "4", label: "Focused portfolio projects" },
+  { value: "Local", label: "Security-first CLI and migration work" },
+  { value: "SaaS", label: "Supabase dashboards and API tooling" },
 ];
 
 export default function Home() {
@@ -151,16 +160,16 @@ export default function Home() {
 
       <section className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-16 sm:px-8 md:grid-cols-[1.05fr_0.95fr] md:pb-20 md:pt-24 lg:px-10">
         <div className="reveal">
-          <p className="section-kicker">Software Developer for AI-powered operations</p>
+          <p className="section-kicker">Software developer building practical tools</p>
           <h1 className="mt-5 max-w-4xl text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
             Jazhem Hamid
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-300 sm:text-xl">
-            Software Developer focused on AI Automation, Agentic Workflows, RAG Systems, and Practical SaaS Tools.
+            I build Supabase apps, local-first migration tools, API dashboards, and AI-assisted workflows for real teams.
           </p>
           <p className="mt-5 max-w-2xl leading-7 text-zinc-400">
-            I build clear, useful web apps that turn messy workflows into organized dashboards, searchable knowledge,
-            and reviewable AI-assisted actions.
+            I like software that feels calm to use: clear data, honest states, reviewable automation, and handoffs that
+            make sense to both clients and developers.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -182,7 +191,7 @@ export default function Home() {
           </div>
         </div>
 
-        <HeroConsole />
+        <HeroProfile />
       </section>
 
       <section id="about" className="section-band">
@@ -243,24 +252,33 @@ export default function Home() {
                 </div>
 
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    className="project-button"
-                    href={project.projectUrl ?? "#"}
-                    target={project.projectUrl ? "_blank" : undefined}
-                    rel={project.projectUrl ? "noopener noreferrer" : undefined}
-                    aria-label={`View ${project.title}`}
-                  >
-                    View Project
-                  </a>
-                  <a
-                    className="project-button project-button-muted"
-                    href={project.githubUrl ?? "#"}
-                    target={project.githubUrl ? "_blank" : undefined}
-                    rel={project.githubUrl ? "noopener noreferrer" : undefined}
-                    aria-label={`${project.title} GitHub`}
-                  >
-                    GitHub
-                  </a>
+                  {project.projectUrl ? (
+                    <a
+                      className="project-button"
+                      href={project.projectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${project.title}`}
+                    >
+                      View Project
+                    </a>
+                  ) : null}
+                  {project.githubUrl ? (
+                    <a
+                      className="project-button project-button-muted"
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${project.title} GitHub`}
+                    >
+                      GitHub
+                    </a>
+                  ) : null}
+                  {!project.projectUrl && !project.githubUrl ? (
+                    <span className="project-button project-button-disabled" aria-disabled="true">
+                      {project.status ?? "In Production"}
+                    </span>
+                  ) : null}
                 </div>
               </div>
             </article>
@@ -341,7 +359,7 @@ export default function Home() {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050608]/85 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#171512]/90 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-10">
         <a className="flex items-center gap-3" href="#" aria-label="Jazhem Hamid home">
           <span className="brand-mark">JH</span>
@@ -362,41 +380,37 @@ function Header() {
   );
 }
 
-function HeroConsole() {
+function HeroProfile() {
   return (
-    <div className="hero-console reveal reveal-delay">
-      <div className="console-top">
-        <span>AI Ops Workspace</span>
-        <div className="console-dots" aria-hidden="true">
-          <span />
-          <span />
-          <span />
+    <aside className="hero-profile reveal reveal-delay" aria-label="Profile summary for Jazhem Hamid">
+      <div className="profile-photo-frame">
+        <Image
+          className="profile-photo"
+          src="/jazhem-hamid-profile.jpg"
+          alt="Portrait of Jazhem Hamid"
+          fill
+          priority
+          sizes="(max-width: 768px) 100vw, 42vw"
+        />
+      </div>
+      <div className="profile-copy">
+        <p className="profile-eyebrow">Available for remote developer roles</p>
+        <h2>Hi, I am Jazhem. I turn messy workflows into usable software.</h2>
+        <p>
+          My current focus is practical developer tooling: Supabase migrations, admin dashboards, API integration flows,
+          and AI automation that stays understandable.
+        </p>
+        <div className="profile-focus-list" aria-label="Current focus areas">
+          <span>Local-first tools</span>
+          <span>Supabase apps</span>
+          <span>API workflows</span>
+        </div>
+        <div className="profile-note">
+          <span aria-hidden="true" />
+          <strong>Building with Claude Code, Next.js, and Supabase</strong>
         </div>
       </div>
-      <div className="console-grid">
-        <div className="console-tile console-tile-large">
-          <div className="flex items-center justify-between">
-            <span className="muted-label">Project summary</span>
-            <span className="status-live">Ready</span>
-          </div>
-          <h2>Client launch is 74% complete</h2>
-          <div className="progress-track">
-            <span />
-          </div>
-          <p>AI recap: onboarding is moving well. Review pending content, assign QA, and send Friday update.</p>
-        </div>
-        <div className="console-tile accent-cyan">
-          <span className="muted-label">RAG answer</span>
-          <strong>3 sources found</strong>
-          <p>Policy, onboarding notes, and client scope matched.</p>
-        </div>
-        <div className="console-tile accent-amber">
-          <span className="muted-label">Agent run</span>
-          <strong>12 tasks logged</strong>
-          <p>Lead notes, follow-ups, and daily summary drafted.</p>
-        </div>
-      </div>
-    </div>
+    </aside>
   );
 }
 
@@ -431,33 +445,6 @@ function ProjectVisual({ variant }: { variant: FeaturedProject["visual"] }) {
     );
   }
 
-  if (variant === "rag") {
-    return (
-      <div className="project-visual visual-rag" aria-hidden="true">
-        <div className="chat-bubble question">How do we onboard a new client?</div>
-        <div className="chat-bubble answer">Use the 5-step checklist and attach the signed scope.</div>
-        <div className="source-row">
-          <span>Source A</span>
-          <span>Source B</span>
-          <span>Source C</span>
-        </div>
-      </div>
-    );
-  }
-
-  if (variant === "autoflow") {
-    return (
-      <div className="project-visual visual-autoflow" aria-hidden="true">
-        {["Lead", "Qualify", "Task log", "Follow-up"].map((item) => (
-          <div className="flow-node" key={item}>
-            <span />
-            {item}
-          </div>
-        ))}
-      </div>
-    );
-  }
-
   if (variant === "api") {
     return (
       <div className="project-visual visual-api" aria-hidden="true">
@@ -475,6 +462,29 @@ function ProjectVisual({ variant }: { variant: FeaturedProject["visual"] }) {
         <div className="api-webhook">
           <span>Webhook payload</span>
           <strong>Ready for retry</strong>
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === "migration") {
+    return (
+      <div className="project-visual visual-migration" aria-hidden="true">
+        <div className="migration-terminal">
+          <span>$ lovable-to-supabase validate</span>
+          <strong>local project bundle ready</strong>
+        </div>
+        <div className="migration-steps">
+          {["SQL", "CSV", "Auth", "Storage"].map((item) => (
+            <div key={item}>
+              <span />
+              {item}
+            </div>
+          ))}
+        </div>
+        <div className="migration-security">
+          <span>Service role key</span>
+          <strong>kept local</strong>
         </div>
       </div>
     );
