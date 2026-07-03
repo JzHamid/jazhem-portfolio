@@ -4,7 +4,7 @@ type FeaturedProject = {
   description: string;
   stack: string[];
   highlights: string[];
-  visual: "clientops" | "rag" | "autoflow" | "skin";
+  visual: "clientops" | "rag" | "autoflow" | "skin" | "api";
   projectUrl?: string;
   githubUrl?: string;
 };
@@ -68,6 +68,28 @@ const featuredProjects: FeaturedProject[] = [
     highlights: ["Transfer learning", "Model benchmarking", "Medical image workflow"],
     visual: "skin",
   },
+  {
+    title: "API Integration Hub",
+    category: "Developer tools dashboard",
+    description:
+      "A developer-tool style dashboard for testing API integrations, public API lookups, internal route handlers, webhook payloads, validated forms, and JSON request/response flows.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Route Handlers",
+      "REST APIs",
+      "Zod validation",
+      "webhooks",
+      "error handling",
+      "API integration",
+      "developer tools UI",
+    ],
+    highlights: ["Public API lookups", "Webhook payload testing", "JSON request flows"],
+    visual: "api",
+    projectUrl: "https://api-integration-hub-gilt.vercel.app/",
+    githubUrl: "https://github.com/JzHamid/api-integration-hub",
+  },
 ];
 
 const skillGroups = [
@@ -117,7 +139,7 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "4", label: "Featured AI and SaaS projects" },
+  { value: "5", label: "Featured AI and SaaS projects" },
   { value: "RAG", label: "Document Q&A and source-backed answers" },
   { value: "AI", label: "Workflow automation and agentic tooling" },
 ];
@@ -378,7 +400,7 @@ function HeroConsole() {
   );
 }
 
-function ProjectVisual({ variant }: { variant: string }) {
+function ProjectVisual({ variant }: { variant: FeaturedProject["visual"] }) {
   if (variant === "clientops") {
     return (
       <div className="project-visual visual-clientops" aria-hidden="true">
@@ -432,6 +454,28 @@ function ProjectVisual({ variant }: { variant: string }) {
             {item}
           </div>
         ))}
+      </div>
+    );
+  }
+
+  if (variant === "api") {
+    return (
+      <div className="project-visual visual-api" aria-hidden="true">
+        <div className="api-request">
+          <span className="api-method">POST</span>
+          <strong>/api/webhooks</strong>
+          <span className="api-status">200</span>
+        </div>
+        <div className="api-json">
+          <span>request: validated</span>
+          <span>route: handler</span>
+          <span>lookup: public API</span>
+          <span>response: JSON</span>
+        </div>
+        <div className="api-webhook">
+          <span>Webhook payload</span>
+          <strong>Ready for retry</strong>
+        </div>
       </div>
     );
   }
