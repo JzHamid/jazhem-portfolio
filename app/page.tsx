@@ -6,8 +6,9 @@ type FeaturedProject = {
   description: string;
   stack: string[];
   highlights: string[];
-  visual: "clientops" | "skin" | "api" | "migration";
+  visual: "clientops" | "rag" | "autoflow" | "skin" | "api" | "migration";
   projectUrl?: string;
+  projectLabel?: string;
   githubUrl?: string;
   status?: "In Production";
 };
@@ -37,6 +38,7 @@ const featuredProjects: FeaturedProject[] = [
       "CSV import",
       "developer automation",
       "Claude Code",
+      "Codex",
       "testing",
     ],
     highlights: ["Local-first migration", "Phased validation flow", "Security-first key handling"],
@@ -97,6 +99,28 @@ const featuredProjects: FeaturedProject[] = [
     stack: ["Python", "CNNs", "TensorFlow", "Model comparison"],
     highlights: ["Transfer learning", "Model benchmarking", "Medical image workflow"],
     visual: "skin",
+    projectUrl: "https://ieeexplore.ieee.org/abstract/document/11554764",
+    projectLabel: "Research Link",
+    githubUrl: "https://github.com/JzHamid/skin_cam_proj",
+  },
+  {
+    title: "KnowledgeBase RAG Assistant",
+    category: "Document AI assistant",
+    description:
+      "A retrieval-augmented assistant that answers questions from company documents and displays source references for trust and review.",
+    stack: ["RAG", "Embeddings", "Vector search", "LLM apps"],
+    highlights: ["Document Q&A", "Source citations", "Grounded responses"],
+    visual: "rag",
+    status: "In Production",
+  },
+  {
+    title: "AutoFlow Agent",
+    category: "AI automation tracker",
+    description:
+      "An agentic workflow tracker that qualifies leads, creates task logs, drafts follow-up messages, and summarizes daily activity.",
+    stack: ["Agents", "Automation", "Workflow design", "CRM logic"],
+    highlights: ["Lead qualification", "Follow-up drafting", "Daily summaries"],
+    visual: "autoflow",
     status: "In Production",
   },
 ];
@@ -148,10 +172,12 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "4", label: "Focused portfolio projects" },
-  { value: "Local", label: "Security-first CLI and migration work" },
-  { value: "SaaS", label: "Supabase dashboards and API tooling" },
+  { value: "6 projects", label: "Live, published, or in-production work" },
+  { value: "Codex + Claude", label: "AI coding partners in my daily workflow" },
+  { value: "Supabase", label: "Auth, Postgres, dashboards, and automations" },
 ];
+
+const builderTools = ["Codex", "Claude Code", "Supabase", "PostgreSQL", "Next.js", "CLI migrations", "API dashboards"];
 
 export default function Home() {
   return (
@@ -260,7 +286,7 @@ export default function Home() {
                       rel="noopener noreferrer"
                       aria-label={`View ${project.title}`}
                     >
-                      View Project
+                      {project.projectLabel ?? "View Project"}
                     </a>
                   ) : null}
                   {project.githubUrl ? (
@@ -397,17 +423,20 @@ function HeroProfile() {
         <p className="profile-eyebrow">Available for remote developer roles</p>
         <h2>Hi, I am Jazhem. I turn messy workflows into usable software.</h2>
         <p>
-          My current focus is practical developer tooling: Supabase migrations, admin dashboards, API integration flows,
-          and AI automation that stays understandable.
+          My current focus is practical developer tooling: migration CLIs, Supabase dashboards, API integration flows,
+          and automation that stays understandable.
         </p>
-        <div className="profile-focus-list" aria-label="Current focus areas">
-          <span>Local-first tools</span>
-          <span>Supabase apps</span>
-          <span>API workflows</span>
+        <div className="profile-playground" aria-label="Current builder stack">
+          <span className="playground-label">Now tinkering with</span>
+          <div className="playground-track">
+            {builderTools.map((tool) => (
+              <span key={tool}>{tool}</span>
+            ))}
+          </div>
         </div>
         <div className="profile-note">
           <span aria-hidden="true" />
-          <strong>Building with Claude Code, Next.js, and Supabase</strong>
+          <strong>Building with Codex, Claude Code, Next.js, and Supabase</strong>
         </div>
       </div>
     </aside>
@@ -441,6 +470,33 @@ function ProjectVisual({ variant }: { variant: FeaturedProject["visual"] }) {
             <span>Risk: low</span>
           </div>
         </div>
+      </div>
+    );
+  }
+
+  if (variant === "rag") {
+    return (
+      <div className="project-visual visual-rag" aria-hidden="true">
+        <div className="chat-bubble question">What does the company policy say?</div>
+        <div className="chat-bubble answer">Answer drafted with source references attached.</div>
+        <div className="source-row">
+          <span>Docs</span>
+          <span>Chunks</span>
+          <span>Sources</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === "autoflow") {
+    return (
+      <div className="project-visual visual-autoflow" aria-hidden="true">
+        {["Lead", "Qualify", "Task log", "Follow-up"].map((item) => (
+          <div className="flow-node" key={item}>
+            <span />
+            {item}
+          </div>
+        ))}
       </div>
     );
   }
