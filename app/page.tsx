@@ -6,7 +6,7 @@ type FeaturedProject = {
   description: string;
   stack: string[];
   highlights: string[];
-  visual: "clientops" | "rag" | "autoflow" | "skin" | "api" | "migration";
+  visual: "clientops" | "rag" | "autoflow" | "skin" | "api" | "migration" | "pulse";
   projectUrl?: string;
   projectLabel?: string;
   githubUrl?: string;
@@ -22,29 +22,6 @@ const navItems = [
 ];
 
 const featuredProjects: FeaturedProject[] = [
-  {
-    title: "Lovable Cloud to Supabase Migration CLI",
-    category: "Local migration CLI",
-    description:
-      "A local CLI tool for migrating Lovable Cloud-hosted apps into standalone Supabase projects. It processes SQL migrations, table CSVs, auth user exports, and storage files, then runs phased commands for validation, schema migration, data import, auth migration, ID remapping, storage upload, checklist generation, and verification. Built with Claude Code and designed with a security-first local workflow so users do not need to upload sensitive Supabase service role keys to a hosted service.",
-    stack: [
-      "Node.js",
-      "CLI tooling",
-      "Supabase",
-      "PostgreSQL",
-      "data migration",
-      "auth migration",
-      "storage migration",
-      "CSV import",
-      "developer automation",
-      "Claude Code",
-      "Codex",
-      "testing",
-    ],
-    highlights: ["Local-first migration", "Phased validation flow", "Security-first key handling"],
-    visual: "migration",
-    githubUrl: "https://github.com/Abeagle25/lovable-supabase-migration-cli",
-  },
   {
     title: "ClientOps AI Dashboard",
     category: "Full-stack SaaS/admin dashboard",
@@ -68,6 +45,57 @@ const featuredProjects: FeaturedProject[] = [
     visual: "clientops",
     projectUrl: "https://clientops-ai-dashboard.vercel.app/login",
     githubUrl: "https://github.com/JzHamid/clientops-ai-dashboard",
+  },
+  {
+    title: "API Pulse Dashboard",
+    category: "Multi-API Developer Dashboard",
+    description:
+      "A multi-API developer dashboard built for a Vibe Coder OJT challenge. It pulls data from public APIs and turns them into useful dashboards for GitHub profiles, crypto market data, and weather/location insights. It uses public APIs only with no database, authentication, API keys, or secrets, and includes loading, empty, not-found, rate-limit, validation, network, and API error states.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Route Handlers",
+      "REST APIs",
+      "GitHub API",
+      "CoinGecko API",
+      "Open-Meteo API",
+      "Autocomplete",
+      "Error Handling",
+      "Developer Tools UI",
+      "AI-assisted Development",
+    ],
+    highlights: [
+      "GitHub, crypto, and weather modules",
+      "Public APIs only, no secrets",
+      "Raw API previews and resilient error states",
+    ],
+    visual: "pulse",
+    projectUrl: "https://github-pulse-dashboard.vercel.app/",
+    githubUrl: "https://github.com/JzHamid/github-pulse-dashboard",
+  },
+  {
+    title: "Lovable Cloud to Supabase Migration CLI",
+    category: "Local migration CLI",
+    description:
+      "A local CLI tool for migrating Lovable Cloud-hosted apps into standalone Supabase projects. It processes SQL migrations, table CSVs, auth user exports, and storage files, then runs phased commands for validation, schema migration, data import, auth migration, ID remapping, storage upload, checklist generation, and verification. Built with Claude Code and designed with a security-first local workflow so users do not need to upload sensitive Supabase service role keys to a hosted service.",
+    stack: [
+      "Node.js",
+      "CLI tooling",
+      "Supabase",
+      "PostgreSQL",
+      "data migration",
+      "auth migration",
+      "storage migration",
+      "CSV import",
+      "developer automation",
+      "Claude Code",
+      "Codex",
+      "testing",
+    ],
+    highlights: ["Local-first migration", "Phased validation flow", "Security-first key handling"],
+    visual: "migration",
+    githubUrl: "https://github.com/Abeagle25/lovable-supabase-migration-cli",
   },
   {
     title: "API Integration Hub",
@@ -172,7 +200,7 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "6 projects", label: "Live, published, or in-production work" },
+  { value: "7 projects", label: "Live, published, or in-production work" },
   { value: "Codex + Claude", label: "AI coding partners in my daily workflow" },
   { value: "Supabase", label: "Auth, Postgres, dashboards, and automations" },
 ];
@@ -497,6 +525,29 @@ function ProjectVisual({ variant }: { variant: FeaturedProject["visual"] }) {
             {item}
           </div>
         ))}
+      </div>
+    );
+  }
+
+  if (variant === "pulse") {
+    return (
+      <div className="project-visual visual-pulse" aria-hidden="true">
+        <div className="pulse-header">
+          <span>API Pulse</span>
+          <strong>3 live modules</strong>
+        </div>
+        <div className="pulse-modules">
+          {["GitHub", "Crypto", "Weather"].map((item) => (
+            <div key={item}>
+              <span />
+              {item}
+            </div>
+          ))}
+        </div>
+        <div className="pulse-preview">
+          <span>GET /api/public</span>
+          <strong>Raw response preview</strong>
+        </div>
       </div>
     );
   }
