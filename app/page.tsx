@@ -26,7 +26,7 @@ const featuredProjects: FeaturedProject[] = [
     title: "KnowledgeBase RAG Assistant",
     category: "RAG Knowledge Workspace",
     description:
-      "A RAG-based internal knowledge assistant with Supabase document storage, Gemini embeddings, pgvector semantic search, grounded answers, and source citations.",
+      "A professional RAG knowledge workspace that lets users ask questions across internal documents using Supabase document storage, Gemini embeddings, semantic retrieval, keyword fallback, grounded answers, and source citations.",
     stack: [
       "Next.js",
       "TypeScript",
@@ -44,9 +44,10 @@ const featuredProjects: FeaturedProject[] = [
       "AI Automation",
     ],
     highlights: [
-      "Supabase documents and chunks",
-      "Gemini embeddings with pgvector search",
-      "Grounded answers with citations",
+      "Gemini embeddings and pgvector search",
+      "Keyword fallback and no-source guardrails",
+      "Source citation cards",
+      "Document library and RAG pipeline views",
     ],
     visual: "rag",
     projectUrl: "https://knowledgebase-rag-assistant-mah6onmm5.vercel.app/",
@@ -77,6 +78,58 @@ const featuredProjects: FeaturedProject[] = [
     githubUrl: "https://github.com/JzHamid/clientops-ai-dashboard",
   },
   {
+    title: "AI Video Animation Samples",
+    category: "Generative AI Video Production",
+    description:
+      "AI-generated video animation samples created for a lifehack-style content channel. The work focused on using AI image and video tools to plan scenes, generate visuals, iterate prompts, and produce short-form animated content for social media-style educational and lifehack videos.",
+    stack: [
+      "AI Video Generation",
+      "Generative AI",
+      "Prompt Engineering",
+      "Scene Planning",
+      "Visual Storytelling",
+      "Short-form Content",
+      "AI Animation",
+      "Creative Automation",
+      "Freepik",
+      "Google AI Video Tools",
+      "Image Generation",
+    ],
+    highlights: [
+      "Lifehack-style AI animations",
+      "Prompt direction and scene planning",
+      "Image-to-video generation workflows",
+      "Visual consistency iteration",
+      "Creative automation practice",
+    ],
+    visual: "video",
+    projectUrl: "https://drive.google.com/drive/folders/1YhSe40anwtN51OBu1eR7UOZmXsd81Gsa?usp=drive_link",
+    projectLabel: "View Samples",
+  },
+  {
+    title: "Lovable Cloud to Supabase Migration CLI",
+    category: "Local migration CLI",
+    description:
+      "A local CLI tool for migrating Lovable Cloud-hosted apps into standalone Supabase projects. It processes SQL migrations, table CSVs, auth user exports, and storage files, then runs phased commands for validation, schema migration, data import, auth migration, ID remapping, storage upload, checklist generation, and verification. Built with Claude Code and designed with a security-first local workflow so users do not need to upload sensitive Supabase service role keys to a hosted service.",
+    stack: [
+      "Node.js",
+      "CLI tooling",
+      "Supabase",
+      "PostgreSQL",
+      "data migration",
+      "auth migration",
+      "storage migration",
+      "CSV import",
+      "developer automation",
+      "Claude Code",
+      "Codex",
+      "testing",
+    ],
+    highlights: ["Local-first migration", "Phased validation flow", "Security-first key handling"],
+    visual: "migration",
+    githubUrl: "https://github.com/Abeagle25/lovable-supabase-migration-cli",
+  },
+  {
     title: "API Pulse Dashboard",
     category: "Multi-API Developer Dashboard",
     description:
@@ -105,29 +158,6 @@ const featuredProjects: FeaturedProject[] = [
     githubUrl: "https://github.com/JzHamid/github-pulse-dashboard",
   },
   {
-    title: "Lovable Cloud to Supabase Migration CLI",
-    category: "Local migration CLI",
-    description:
-      "A local CLI tool for migrating Lovable Cloud-hosted apps into standalone Supabase projects. It processes SQL migrations, table CSVs, auth user exports, and storage files, then runs phased commands for validation, schema migration, data import, auth migration, ID remapping, storage upload, checklist generation, and verification. Built with Claude Code and designed with a security-first local workflow so users do not need to upload sensitive Supabase service role keys to a hosted service.",
-    stack: [
-      "Node.js",
-      "CLI tooling",
-      "Supabase",
-      "PostgreSQL",
-      "data migration",
-      "auth migration",
-      "storage migration",
-      "CSV import",
-      "developer automation",
-      "Claude Code",
-      "Codex",
-      "testing",
-    ],
-    highlights: ["Local-first migration", "Phased validation flow", "Security-first key handling"],
-    visual: "migration",
-    githubUrl: "https://github.com/Abeagle25/lovable-supabase-migration-cli",
-  },
-  {
     title: "Skin Disease Cam",
     category: "CNN classification project",
     description:
@@ -138,16 +168,6 @@ const featuredProjects: FeaturedProject[] = [
     projectUrl: "https://ieeexplore.ieee.org/abstract/document/11554764",
     projectLabel: "Research Link",
     githubUrl: "https://github.com/JzHamid/skin_cam_proj",
-  },
-  {
-    title: "AI Video Generation Samples",
-    category: "AI media generation samples",
-    description:
-      "A collection of AI-generated video samples focused on prompt direction, visual consistency, motion quality, and practical creative production workflows.",
-    stack: ["AI video", "Prompt direction", "Creative workflow", "Visual consistency"],
-    highlights: ["Prompted video concepts", "Motion experiments", "Creative AI workflow"],
-    visual: "video",
-    status: "In Production",
   },
 ];
 
@@ -607,8 +627,8 @@ function ProjectVisual({ variant }: { variant: FeaturedProject["visual"] }) {
           <span />
         </div>
         <div className="video-prompt">
-          <span>prompt</span>
-          <strong>cinematic product motion</strong>
+          <span>scene</span>
+          <strong>lifehack animation flow</strong>
         </div>
       </div>
     );
