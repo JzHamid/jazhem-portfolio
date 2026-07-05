@@ -15,12 +15,14 @@ The site positions Jazhem as a Software Developer focused on AI Automation, Agen
 
 ## Featured Projects
 
-- ClientOps AI Dashboard
 - KnowledgeBase RAG Assistant
-- AutoFlow Agent
+- ClientOps AI Dashboard
+- API Pulse Dashboard
+- Lovable Cloud to Supabase Migration CLI
 - Skin Disease Cam
+- AI Video Generation Samples
 
-Project buttons currently use placeholder links (`#`) for View Project and GitHub.
+Project cards use working live demo, research, or GitHub links where available.
 
 ## Tech Stack
 

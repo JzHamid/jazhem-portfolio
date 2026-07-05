@@ -6,7 +6,7 @@ type FeaturedProject = {
   description: string;
   stack: string[];
   highlights: string[];
-  visual: "clientops" | "rag" | "autoflow" | "skin" | "api" | "migration" | "pulse";
+  visual: "clientops" | "rag" | "autoflow" | "skin" | "api" | "migration" | "pulse" | "video";
   projectUrl?: string;
   projectLabel?: string;
   githubUrl?: string;
@@ -22,6 +22,36 @@ const navItems = [
 ];
 
 const featuredProjects: FeaturedProject[] = [
+  {
+    title: "KnowledgeBase RAG Assistant",
+    category: "RAG Knowledge Workspace",
+    description:
+      "A RAG-based internal knowledge assistant with Supabase document storage, Gemini embeddings, pgvector semantic search, grounded answers, and source citations.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+      "pgvector",
+      "Gemini Embeddings",
+      "Semantic Search",
+      "RAG",
+      "Vector Search",
+      "Source Citations",
+      "No-source Guardrails",
+      "Knowledge Base",
+      "AI Automation",
+    ],
+    highlights: [
+      "Supabase documents and chunks",
+      "Gemini embeddings with pgvector search",
+      "Grounded answers with citations",
+    ],
+    visual: "rag",
+    projectUrl: "https://knowledgebase-rag-assistant-mah6onmm5.vercel.app/",
+    githubUrl: "https://github.com/JzHamid/knowledgebase-rag-assistant",
+  },
   {
     title: "ClientOps AI Dashboard",
     category: "Full-stack SaaS/admin dashboard",
@@ -98,28 +128,6 @@ const featuredProjects: FeaturedProject[] = [
     githubUrl: "https://github.com/Abeagle25/lovable-supabase-migration-cli",
   },
   {
-    title: "API Integration Hub",
-    category: "Developer tools dashboard",
-    description:
-      "A developer-tool style dashboard for testing API integrations, public API lookups, internal route handlers, webhook payloads, validated forms, and JSON request/response flows.",
-    stack: [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Route Handlers",
-      "REST APIs",
-      "Zod validation",
-      "webhooks",
-      "error handling",
-      "API integration",
-      "developer tools UI",
-    ],
-    highlights: ["Public API lookups", "Webhook payload testing", "JSON request flows"],
-    visual: "api",
-    projectUrl: "https://api-integration-hub-gilt.vercel.app/",
-    githubUrl: "https://github.com/JzHamid/api-integration-hub",
-  },
-  {
     title: "Skin Disease Cam",
     category: "CNN classification project",
     description:
@@ -132,23 +140,13 @@ const featuredProjects: FeaturedProject[] = [
     githubUrl: "https://github.com/JzHamid/skin_cam_proj",
   },
   {
-    title: "KnowledgeBase RAG Assistant",
-    category: "Document AI assistant",
+    title: "AI Video Generation Samples",
+    category: "AI media generation samples",
     description:
-      "A retrieval-augmented assistant that answers questions from company documents and displays source references for trust and review.",
-    stack: ["RAG", "Embeddings", "Vector search", "LLM apps"],
-    highlights: ["Document Q&A", "Source citations", "Grounded responses"],
-    visual: "rag",
-    status: "In Production",
-  },
-  {
-    title: "AutoFlow Agent",
-    category: "AI automation tracker",
-    description:
-      "An agentic workflow tracker that qualifies leads, creates task logs, drafts follow-up messages, and summarizes daily activity.",
-    stack: ["Agents", "Automation", "Workflow design", "CRM logic"],
-    highlights: ["Lead qualification", "Follow-up drafting", "Daily summaries"],
-    visual: "autoflow",
+      "A collection of AI-generated video samples focused on prompt direction, visual consistency, motion quality, and practical creative production workflows.",
+    stack: ["AI video", "Prompt direction", "Creative workflow", "Visual consistency"],
+    highlights: ["Prompted video concepts", "Motion experiments", "Creative AI workflow"],
+    visual: "video",
     status: "In Production",
   },
 ];
@@ -200,7 +198,7 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "7 projects", label: "Live, published, or in-production work" },
+  { value: "6 projects", label: "Live, published, or in-production work" },
   { value: "Codex + Claude", label: "AI coding partners in my daily workflow" },
   { value: "Supabase", label: "Auth, Postgres, dashboards, and automations" },
 ];
@@ -592,6 +590,25 @@ function ProjectVisual({ variant }: { variant: FeaturedProject["visual"] }) {
         <div className="migration-security">
           <span>Service role key</span>
           <strong>kept local</strong>
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === "video") {
+    return (
+      <div className="project-visual visual-video" aria-hidden="true">
+        <div className="video-frame">
+          <span className="video-play" />
+        </div>
+        <div className="video-timeline">
+          <span />
+          <span />
+          <span />
+        </div>
+        <div className="video-prompt">
+          <span>prompt</span>
+          <strong>cinematic product motion</strong>
         </div>
       </div>
     );
