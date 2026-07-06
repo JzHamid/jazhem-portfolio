@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { RevealOnScroll, ThemeToggle } from "./reveal-on-scroll";
 
 type FeaturedProject = {
   title: string;
@@ -257,32 +258,41 @@ const builderTools = ["Codex", "Claude Code", "Supabase", "PostgreSQL", "Next.js
 export default function Home() {
   return (
     <main className="portfolio-bg min-h-screen text-zinc-100">
+      <RevealOnScroll />
+      <div className="stage-effects" aria-hidden="true">
+        <span className="stage-particle particle-one" />
+        <span className="stage-particle particle-two" />
+        <span className="stage-particle particle-three" />
+        <span className="stage-particle particle-four" />
+        <span className="stage-beam beam-one" />
+        <span className="stage-beam beam-two" />
+      </div>
       <Header />
 
-      <section className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-16 sm:px-8 md:grid-cols-[1.05fr_0.95fr] md:pb-20 md:pt-24 lg:px-10">
-        <div className="reveal">
-          <p className="section-kicker">Software developer building practical tools</p>
-          <h1 className="mt-5 max-w-4xl text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
+      <section className="hero-section mx-auto grid w-full max-w-7xl items-center gap-10 px-5 pb-16 pt-16 sm:px-8 md:grid-cols-[1.05fr_0.95fr] md:pb-20 md:pt-24 lg:px-10">
+        <div className="hero-copy-block reveal">
+          <p className="section-kicker hero-kicker">Software developer building practical tools</p>
+          <h1 className="hero-title mt-5 max-w-4xl text-5xl font-semibold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
             Jazhem Hamid
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-zinc-300 sm:text-xl">
+          <p className="hero-lead mt-6 max-w-2xl text-lg leading-8 text-zinc-300 sm:text-xl">
             I build Supabase apps, local-first migration tools, API dashboards, and AI-assisted workflows for real teams.
           </p>
-          <p className="mt-5 max-w-2xl leading-7 text-zinc-400">
+          <p className="hero-support mt-5 max-w-2xl leading-7 text-zinc-400">
             I like software that feels calm to use: clear data, honest states, reviewable automation, and handoffs that
             make sense to both clients and developers.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a className="primary-button" href="#projects">
-              View Projects
+          <div className="hero-actions mt-8 flex flex-col gap-3 sm:flex-row">
+            <a className="primary-button halo-button halo-button-warm" href="#projects">
+              <span className="button-label">View Projects</span>
             </a>
-            <a className="secondary-button" href="#contact">
-              Contact me
+            <a className="secondary-button halo-button halo-button-soft" href="#contact">
+              <span className="button-label">Contact me</span>
             </a>
           </div>
 
-          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+          <div className="hero-stats mt-10 grid gap-3 sm:grid-cols-3">
             {stats.map((stat) => (
               <div className="stat-card" key={stat.label}>
                 <strong>{stat.value}</strong>
@@ -295,7 +305,7 @@ export default function Home() {
         <HeroProfile />
       </section>
 
-      <section id="about" className="section-band">
+      <section id="about" className="section-band reveal-on-scroll">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 sm:px-8 md:grid-cols-[0.8fr_1.2fr] lg:px-10">
           <div>
             <p className="section-kicker">About</p>
@@ -321,15 +331,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="projects" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
-        <div className="max-w-3xl">
+      <section id="projects" className="projects-section mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
+        <div className="max-w-3xl reveal-on-scroll">
           <p className="section-kicker">Featured projects</p>
           <h2 className="section-title">Portfolio pieces for software, AI automation, and agentic development roles.</h2>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-2">
-          {featuredProjects.map((project) => (
-            <article className="project-card" key={project.title}>
+        <div className="projects-grid mt-10 grid gap-5 lg:grid-cols-2">
+          {featuredProjects.map((project, index) => (
+            <article
+              className={`project-card reveal-on-scroll ${index < 2 ? "project-card-spotlight" : ""}`}
+              key={project.title}
+            >
               <ProjectVisual variant={project.visual} />
               <div className="flex flex-1 flex-col p-5 sm:p-6">
                 <p className="text-sm font-medium text-zinc-400">{project.category}</p>
@@ -387,7 +400,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="skills" className="section-band">
+      <section id="skills" className="section-band reveal-on-scroll">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
           <div className="max-w-3xl">
             <p className="section-kicker">Skills</p>
@@ -411,7 +424,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="process" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
+      <section id="process" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 reveal-on-scroll">
         <div className="grid gap-8 md:grid-cols-[0.85fr_1.15fr]">
           <div>
             <p className="section-kicker">Process</p>
@@ -435,7 +448,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="section-band">
+      <section id="contact" className="section-band reveal-on-scroll">
         <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
           <div className="contact-panel">
             <div>
@@ -446,10 +459,32 @@ export default function Home() {
                 and help teams make better use of AI.
               </p>
             </div>
-            <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-              <a className="primary-button" href="mailto:jazhemhamid1@gmail.com">
-                Email Me
+            <div className="contact-actions">
+              <a className="primary-button halo-button halo-button-warm" href="mailto:jazhemhamid1@gmail.com">
+                <span className="button-label">Email Me</span>
               </a>
+              <div className="contact-socials" aria-label="Social profiles">
+                <a
+                  className="social-button halo-icon-button"
+                  href="https://github.com/JzHamid"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Jazhem Hamid on GitHub"
+                >
+                  <span aria-hidden="true">GH</span>
+                  <span>GitHub</span>
+                </a>
+                <a
+                  className="social-button halo-icon-button halo-icon-button-pink"
+                  href="https://www.linkedin.com/in/jzhamid/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Jazhem Hamid on LinkedIn"
+                >
+                  <span aria-hidden="true">in</span>
+                  <span>LinkedIn</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -460,8 +495,8 @@ export default function Home() {
 
 function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#171512]/90 backdrop-blur-xl">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-10">
+    <header className="site-header sticky top-0 z-50">
+      <nav className="site-nav mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-10">
         <a className="flex items-center gap-3" href="#" aria-label="Jazhem Hamid home">
           <span className="brand-mark">JH</span>
           <span className="hidden text-sm font-semibold text-white sm:block">Jazhem Hamid</span>
@@ -473,9 +508,12 @@ function Header() {
             </a>
           ))}
         </div>
-        <a className="header-cta" href="#contact">
-          Hire Me
-        </a>
+        <div className="header-actions">
+          <ThemeToggle />
+          <a className="header-cta" href="#contact">
+            Hire Me
+          </a>
+        </div>
       </nav>
     </header>
   );
@@ -504,9 +542,16 @@ function HeroProfile() {
         <div className="profile-playground" aria-label="Current builder stack">
           <span className="playground-label">Now tinkering with</span>
           <div className="playground-track">
-            {builderTools.map((tool) => (
-              <span key={tool}>{tool}</span>
-            ))}
+            <div className="playground-set">
+              {builderTools.map((tool) => (
+                <span key={tool}>{tool}</span>
+              ))}
+            </div>
+            <div className="playground-set" aria-hidden="true">
+              {builderTools.map((tool) => (
+                <span key={`${tool}-duplicate`}>{tool}</span>
+              ))}
+            </div>
           </div>
         </div>
         <div className="profile-note">
