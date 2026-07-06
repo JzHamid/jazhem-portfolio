@@ -78,6 +78,35 @@ const featuredProjects: FeaturedProject[] = [
     githubUrl: "https://github.com/JzHamid/clientops-ai-dashboard",
   },
   {
+    title: "AI Prospect Triage Workflow",
+    category: "AI Sales Automation Workflow",
+    description:
+      "An AI lead triage workflow prototype for a local service business use case. It analyzes incoming prospects, scores them, classifies them as Hot/Warm/Cold, drafts follow-ups, logs the result into Google Sheets, and creates a Gmail draft for review.",
+    stack: [
+      "Make",
+      "Gemini",
+      "Webhooks",
+      "Google Sheets",
+      "Gmail",
+      "JSON Parsing",
+      "AI Automation",
+      "Lead Qualification",
+      "Sales Automation",
+      "Workflow Automation",
+      "Prompt Engineering",
+      "No-code Automation",
+    ],
+    highlights: [
+      "Webhook-based lead intake",
+      "Gemini JSON lead scoring",
+      "Hot/Warm/Cold prospect status",
+      "Sheets logging and Gmail draft handoff",
+    ],
+    visual: "autoflow",
+    projectUrl: "https://www.loom.com/share/aa94f2656e8f4b94a508804d9ed0abc5",
+    projectLabel: "Watch Demo",
+  },
+  {
     title: "AI Video Animation Samples",
     category: "Generative AI Video Production",
     description:
@@ -218,7 +247,7 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "6 projects", label: "Live, published, or in-production work" },
+  { value: "7 projects", label: "Live, published, demo, or in-production work" },
   { value: "Codex + Claude", label: "AI coding partners in my daily workflow" },
   { value: "Supabase", label: "Auth, Postgres, dashboards, and automations" },
 ];
@@ -537,7 +566,7 @@ function ProjectVisual({ variant }: { variant: FeaturedProject["visual"] }) {
   if (variant === "autoflow") {
     return (
       <div className="project-visual visual-autoflow" aria-hidden="true">
-        {["Lead", "Qualify", "Task log", "Follow-up"].map((item) => (
+        {["Lead", "AI score", "Sheet log", "Gmail draft"].map((item) => (
           <div className="flow-node" key={item}>
             <span />
             {item}
