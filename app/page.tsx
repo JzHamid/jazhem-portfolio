@@ -7,11 +7,20 @@ type FeaturedProject = {
   description: string;
   stack: string[];
   highlights: string[];
-  visual: "clientops" | "rag" | "autoflow" | "skin" | "api" | "migration" | "pulse" | "video";
+  visual:
+    | "clientops"
+    | "rag"
+    | "autoflow"
+    | "skin"
+    | "api"
+    | "migration"
+    | "pulse"
+    | "video"
+    | "devwatch";
   projectUrl?: string;
   projectLabel?: string;
   githubUrl?: string;
-  status?: "In Production";
+  status?: "In Development" | "In Production";
 };
 
 const navItems = [
@@ -23,6 +32,29 @@ const navItems = [
 ];
 
 const featuredProjects: FeaturedProject[] = [
+  {
+    title: "Dev Watch",
+    category: "Operations Intelligence Platform",
+    description:
+      "An in-development operations platform for turning client, project, budget, feedback, conversation, and automation data into a decision-focused command center.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Supabase",
+      "PostgreSQL",
+      "Row Level Security",
+      "Realtime",
+      "pg-boss",
+      "Workflow Automation",
+    ],
+    highlights: [
+      "At-risk projects and budget visibility",
+      "Client health and feedback monitoring",
+      "Human-approved automation actions",
+    ],
+    visual: "devwatch",
+    status: "In Development",
+  },
   {
     title: "KnowledgeBase RAG Assistant",
     category: "RAG Knowledge Workspace",
@@ -564,6 +596,34 @@ function HeroProfile() {
 }
 
 function ProjectVisual({ variant }: { variant: FeaturedProject["visual"] }) {
+  if (variant === "devwatch") {
+    return (
+      <div className="project-visual visual-devwatch" aria-hidden="true">
+        <div className="devwatch-header">
+          <span>Dev Watch</span>
+          <strong>Command center</strong>
+        </div>
+        <div className="devwatch-signals">
+          <div>
+            <span className="signal-dot signal-dot-risk" />
+            <strong>3 projects need review</strong>
+            <small>Timeline and budget signals</small>
+          </div>
+          <div>
+            <span className="signal-dot" />
+            <strong>Automation queue</strong>
+            <small>2 actions awaiting approval</small>
+          </div>
+        </div>
+        <div className="devwatch-footer">
+          <span>Clients</span>
+          <span>Projects</span>
+          <span>Signals</span>
+        </div>
+      </div>
+    );
+  }
+
   if (variant === "clientops") {
     return (
       <div className="project-visual visual-clientops" aria-hidden="true">
