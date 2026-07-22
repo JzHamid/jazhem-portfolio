@@ -7,6 +7,10 @@ type FeaturedProject = {
   description: string;
   stack: string[];
   highlights: string[];
+  group?: "software" | "creative" | "publication";
+  hidden?: boolean;
+  thumbnail?: string;
+  thumbnailAlt?: string;
   visual:
     | "clientops"
     | "rag"
@@ -16,7 +20,10 @@ type FeaturedProject = {
     | "migration"
     | "pulse"
     | "video"
-    | "devwatch";
+    | "devwatch"
+    | "electric"
+    | "fitness"
+    | "pitstop";
   projectUrl?: string;
   projectLabel?: string;
   githubUrl?: string;
@@ -164,6 +171,7 @@ const featuredProjects: FeaturedProject[] = [
       "Visual consistency iteration",
       "Creative automation practice",
     ],
+    group: "creative",
     visual: "video",
     projectUrl: "https://drive.google.com/drive/folders/1YhSe40anwtN51OBu1eR7UOZmXsd81Gsa?usp=drive_link",
     projectLabel: "View Samples",
@@ -215,6 +223,8 @@ const featuredProjects: FeaturedProject[] = [
       "Public APIs only, no secrets",
       "Raw API previews and resilient error states",
     ],
+    thumbnail: "/projects/api-pulse-dashboard.png",
+    thumbnailAlt: "API Pulse Dashboard showing its GitHub, crypto, and weather API modules",
     visual: "pulse",
     projectUrl: "https://github-pulse-dashboard.vercel.app/",
     githubUrl: "https://github.com/JzHamid/github-pulse-dashboard",
@@ -226,12 +236,123 @@ const featuredProjects: FeaturedProject[] = [
       "A computer vision project comparing MobileNetV2, EfficientNetB0, ResNet50, InceptionV3, and DenseNet121 for skin lesion classification.",
     stack: ["Python", "CNNs", "TensorFlow", "Model comparison"],
     highlights: ["Transfer learning", "Model benchmarking", "Medical image workflow"],
+    group: "publication",
     visual: "skin",
     projectUrl: "https://ieeexplore.ieee.org/abstract/document/11554764",
     projectLabel: "Research Link",
     githubUrl: "https://github.com/JzHamid/skin_cam_proj",
   },
+  {
+    title: "CopperArc Electric",
+    category: "Service Business Website",
+    description:
+      "A responsive multi-page website for a residential and light-commercial electrical services brand, designed around clear service discovery, local trust, urgent-help messaging, and estimate conversion.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "React Hook Form",
+      "Zod",
+      "Radix UI",
+      "Responsive Design",
+      "Local SEO",
+      "Conversion UX",
+    ],
+    highlights: [
+      "Residential, commercial, and urgent service paths",
+      "Accessible responsive navigation",
+      "Validated estimate request flow",
+      "Metadata, sitemap, and local SEO structure",
+    ],
+    group: "creative",
+    thumbnail: "/projects/copperarc-electric.png",
+    thumbnailAlt: "CopperArc Electric responsive service business website homepage",
+    visual: "electric",
+    projectUrl: "https://copperarc-electric.vercel.app/",
+    githubUrl: "https://github.com/JzHamid/copperarc-electric",
+  },
+  {
+    title: "Pulse House Fitness",
+    category: "Fitness Studio Website",
+    description:
+      "A brand-led website for a boutique boxing, strength, and conditioning studio, with clear journeys for classes, schedules, coaches, memberships, and first-session inquiries.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Custom CSS",
+      "Server Actions",
+      "Zod",
+      "Responsive Design",
+      "Content Architecture",
+      "SEO",
+      "Web Design",
+    ],
+    highlights: [
+      "Class, coach, and membership journeys",
+      "Responsive weekly schedule",
+      "Branded visual storytelling",
+      "Validated free-intro inquiry flow",
+    ],
+    group: "creative",
+    thumbnail: "/projects/pulse-house-fitness.png",
+    thumbnailAlt: "Pulse House Fitness website homepage with boxing studio branding",
+    visual: "fitness",
+    projectUrl: "https://pulse-house-fitness.vercel.app/",
+    githubUrl: "https://github.com/JzHamid/Pulse-House-Fitness",
+  },
+  {
+    title: "PitStop AI",
+    category: "Business AI Readiness Diagnostic",
+    description:
+      "A focused operational diagnostic for owner-led service businesses that uses 20 behavior-based questions to identify AI readiness, operational drag, automation opportunities, safety boundaries, and practical next actions.",
+    stack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+      "Zod",
+      "Vitest",
+      "Deterministic Scoring",
+      "Responsive UX",
+      "Privacy by Design",
+    ],
+    highlights: [
+      "RACE and readiness-foundation scoring",
+      "Hidden Drag contradiction checks",
+      "Secure server-side result persistence",
+      "Tailored 7-, 30-, and 90-day actions",
+    ],
+    group: "creative",
+    hidden: true,
+    visual: "pitstop",
+    projectUrl: "https://pitstop-ai-seven.vercel.app/",
+    githubUrl: "https://github.com/JzHamid/pitstop-ai",
+  },
 ];
+
+const visibleProjects = featuredProjects.filter((project) => !project.hidden);
+
+const projectGroups = [
+  {
+    id: "software",
+    title: "Software & AI",
+    description: "Product builds, automation workflows, developer tools, and practical AI systems.",
+    projects: visibleProjects.filter((project) => !project.group || project.group === "software"),
+  },
+  {
+    id: "creative",
+    title: "Creative Work & Frontend Design",
+    description: "Responsive business websites, visual storytelling, and generative media work.",
+    projects: visibleProjects.filter((project) => project.group === "creative"),
+  },
+  {
+    id: "publication",
+    title: "Publications",
+    description: "Research work connecting software development, computer vision, and applied machine learning.",
+    projects: visibleProjects.filter((project) => project.group === "publication"),
+  },
+] as const;
 
 const skillGroups = [
   {
@@ -280,7 +401,7 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "7 projects", label: "Live, published, demo, or in-production work" },
+  { value: `${visibleProjects.length} projects`, label: "Live, published, demo, or in-development work" },
   { value: "Codex + Claude", label: "AI coding partners in my daily workflow" },
   { value: "Supabase", label: "Auth, Postgres, dashboards, and automations" },
 ];
@@ -366,68 +487,35 @@ export default function Home() {
       <section id="projects" className="projects-section mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10">
         <div className="max-w-3xl reveal-on-scroll">
           <p className="section-kicker">Featured projects</p>
-          <h2 className="section-title">Portfolio pieces for software, AI automation, and agentic development roles.</h2>
+          <h2 className="section-title">Selected work across software, AI automation, and conversion-focused web design.</h2>
         </div>
 
-        <div className="projects-grid mt-10 grid gap-5 lg:grid-cols-2">
-          {featuredProjects.map((project, index) => (
-            <article
-              className={`project-card reveal-on-scroll ${index < 2 ? "project-card-spotlight" : ""}`}
-              key={project.title}
-            >
-              <ProjectVisual variant={project.visual} />
-              <div className="flex flex-1 flex-col p-5 sm:p-6">
-                <p className="text-sm font-medium text-zinc-400">{project.category}</p>
-                <h3 className="mt-2 text-2xl font-semibold text-white">{project.title}</h3>
-                <p className="mt-4 leading-7 text-zinc-300">{project.description}</p>
+        <div className="project-groups mt-10">
+          {projectGroups.map((group) => (
+            <details className="project-group reveal-on-scroll" key={group.id} open={group.id === "software"}>
+              <summary className="project-group-heading">
+                <span className="project-group-title-wrap">
+                  <span className="project-group-count">
+                    {group.projects.length.toString().padStart(2, "0")} projects
+                  </span>
+                  <span className="project-group-title" id={`${group.id}-projects`}>
+                    {group.title}
+                  </span>
+                </span>
+                <span className="project-group-description">{group.description}</span>
+                <span className="project-group-toggle" aria-hidden="true" />
+              </summary>
 
-                <ul className="mt-5 grid gap-2 text-sm text-zinc-300 sm:grid-cols-3">
-                  {project.highlights.map((highlight) => (
-                    <li className="highlight-pill" key={highlight}>
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.stack.map((item) => (
-                    <span className="tech-pill" key={item}>
-                      {item}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  {project.projectUrl ? (
-                    <a
-                      className="project-button"
-                      href={project.projectUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View ${project.title}`}
-                    >
-                      {project.projectLabel ?? "View Project"}
-                    </a>
-                  ) : null}
-                  {project.githubUrl ? (
-                    <a
-                      className="project-button project-button-muted"
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`${project.title} GitHub`}
-                    >
-                      GitHub
-                    </a>
-                  ) : null}
-                  {!project.projectUrl && !project.githubUrl ? (
-                    <span className="project-button project-button-disabled" aria-disabled="true">
-                      {project.status ?? "In Production"}
-                    </span>
-                  ) : null}
-                </div>
+              <div className="projects-grid grid gap-5 lg:grid-cols-2">
+                {group.projects.map((project, index) => (
+                  <ProjectCard
+                    key={project.title}
+                    project={project}
+                    spotlight={group.id === "software" && index < 2}
+                  />
+                ))}
               </div>
-            </article>
+            </details>
           ))}
         </div>
       </section>
@@ -592,6 +680,84 @@ function HeroProfile() {
         </div>
       </div>
     </aside>
+  );
+}
+
+function ProjectCard({ project, spotlight }: { project: FeaturedProject; spotlight: boolean }) {
+  return (
+    <article className={`project-card reveal-on-scroll ${spotlight ? "project-card-spotlight" : ""}`}>
+      {project.thumbnail ? (
+        <div className="project-thumbnail">
+          <Image
+            src={project.thumbnail}
+            alt={project.thumbnailAlt ?? `${project.title} project preview`}
+            fill
+            sizes="(max-width: 1023px) 100vw, 50vw"
+          />
+        </div>
+      ) : (
+        <ProjectVisual variant={project.visual} />
+      )}
+      <div className="project-card-copy flex flex-1 flex-col p-5 sm:p-6">
+        <p className="text-sm font-medium text-zinc-400">{project.category}</p>
+        <h3 className="mt-2 text-2xl font-semibold text-white">{project.title}</h3>
+        <p className="mt-4 leading-7 text-zinc-300">{project.description}</p>
+
+        <details className="project-details mt-5">
+          <summary>
+            <span>Project details</span>
+            <span className="project-details-icon" aria-hidden="true" />
+          </summary>
+          <div className="project-details-content">
+            <ul className="grid gap-2 text-sm text-zinc-300 sm:grid-cols-2">
+              {project.highlights.map((highlight) => (
+                <li className="highlight-pill" key={highlight}>
+                  {highlight}
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-5 flex flex-wrap gap-2">
+              {project.stack.map((item) => (
+                <span className="tech-pill" key={item}>
+                  {item}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              {project.projectUrl ? (
+                <a
+                  className="project-button"
+                  href={project.projectUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View ${project.title}`}
+                >
+                  {project.projectLabel ?? "View Project"}
+                </a>
+              ) : null}
+              {project.githubUrl ? (
+                <a
+                  className="project-button project-button-muted"
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${project.title} GitHub`}
+                >
+                  GitHub
+                </a>
+              ) : null}
+              {!project.projectUrl && !project.githubUrl ? (
+                <span className="project-button project-button-disabled" aria-disabled="true">
+                  {project.status ?? "In Production"}
+                </span>
+              ) : null}
+            </div>
+          </div>
+        </details>
+      </div>
+    </article>
   );
 }
 
@@ -764,6 +930,78 @@ function ProjectVisual({ variant }: { variant: FeaturedProject["visual"] }) {
           <span>scene</span>
           <strong>lifehack animation flow</strong>
         </div>
+      </div>
+    );
+  }
+
+  if (variant === "electric") {
+    return (
+      <div className="project-visual visual-electric" aria-hidden="true">
+        <div className="business-browser electric-browser">
+          <div className="business-browser-bar">
+            <span>CopperArc</span>
+            <i />
+            <i />
+            <i />
+          </div>
+          <div className="electric-hero-mini">
+            <div>
+              <small>Electrical services</small>
+              <strong>Clear work. Clear next steps.</strong>
+              <span />
+            </div>
+            <div className="electric-panel-mini" />
+          </div>
+          <div className="business-tile-row">
+            <span>Residential</span>
+            <span>Commercial</span>
+            <span>Urgent help</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === "fitness") {
+    return (
+      <div className="project-visual visual-fitness" aria-hidden="true">
+        <div className="fitness-wordmark">PULSE HOUSE</div>
+        <div className="fitness-layout-mini">
+          <div>
+            <small>Train with purpose</small>
+            <strong>Boxing. Strength. Conditioning.</strong>
+          </div>
+          <div className="fitness-session-list">
+            <span><b>06:00</b> Boxing</span>
+            <span><b>12:00</b> Strength</span>
+            <span><b>17:30</b> Conditioning</span>
+          </div>
+        </div>
+        <div className="fitness-footer-mini">
+          <span>Classes</span>
+          <span>Schedule</span>
+          <span>Free intro</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === "pitstop") {
+    return (
+      <div className="project-visual visual-pitstop" aria-hidden="true">
+        <div className="pitstop-header-mini">
+          <span>PS</span>
+          <strong>PITSTOP.AI</strong>
+          <small>diagnostic / v0.2</small>
+        </div>
+        <div className="pitstop-race-mini">
+          <span>R<small>Revenue</small></span>
+          <span>A<small>Acquisition</small></span>
+          <strong>FIND THE DRAG</strong>
+          <span>C<small>Conversion</small></span>
+          <span>E<small>Efficiency</small></span>
+        </div>
+        <div className="pitstop-progress-mini"><span /></div>
       </div>
     );
   }
